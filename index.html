@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrollESP</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0b0e14;font-family:'Segoe UI',sans-serif;color:#e2e8f0}
+.card{background:rgba(17,21,30,.9);border:1px solid rgba(0,212,255,.15);border-radius:16px;padding:40px;max-width:400px;width:90%;text-align:center;backdrop-filter:blur(20px)}
+h1{font-size:28px;margin-bottom:6px;background:linear-gradient(135deg,#00d4ff,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.version{color:#64748b;font-size:13px;margin-bottom:30px}
+.field{display:flex;gap:10px;margin-bottom:16px}
+input{flex:1;padding:12px 16px;background:rgba(30,35,50,.8);border:1px solid rgba(100,116,139,.3);border-radius:10px;color:#e2e8f0;font-size:15px;outline:none;transition:border .2s}
+input:focus{border-color:#00d4ff}
+input::placeholder{color:#475569}
+button{width:100%;padding:12px;background:linear-gradient(135deg,#00d4ff,#0099cc);border:none;border-radius:10px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .2s}
+button:hover{opacity:.85}
+.error{color:#f87171;font-size:13px;margin-top:10px;display:none}
+.dl-area{display:none;margin-top:20px}
+.dl-btn{display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#00ff88,#00cc6a);border-radius:12px;color:#0b0e14;font-weight:700;font-size:16px;text-decoration:none;transition:transform .15s}
+.dl-btn:hover{transform:scale(1.03)}
+.info{color:#64748b;font-size:12px;margin-top:14px}
+.features{text-align:left;margin-top:20px;padding:16px;background:rgba(0,212,255,.05);border-radius:10px;border:1px solid rgba(0,212,255,.1)}
+.features div{padding:4px 0;font-size:13px;color:#94a3b8}
+.features span{color:#00d4ff;margin-right:6px}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>TrollESP</h1>
+  <div class="version">v2.1.0 &mdash; Minecraft Forge 1.20.1</div>
+
+  <div id="login">
+    <div class="field">
+      <input type="password" id="pwd" placeholder="Mot de passe" autocomplete="off">
+    </div>
+    <button onclick="check()">Acceder</button>
+    <div class="error" id="err">Mot de passe incorrect</div>
+  </div>
+
+  <div class="dl-area" id="dl">
+    <a class="dl-btn" href="https://github.com/ImSombre/TrollESP-download/releases/download/v2.1.0/TrollESP_v2.exe">Telecharger TrollESP.exe</a>
+    <div class="info">Windows 10/11 &bull; Portable &bull; ~70 MB</div>
+    <div class="features">
+      <div><span>&#9889;</span> ESP overlay (hitbox + squelette)</div>
+      <div><span>&#9889;</span> Tracers couleurs par distance</div>
+      <div><span>&#9889;</span> Aimbot contextuel + cone FOV</div>
+      <div><span>&#9889;</span> Anti-capture (invisible OBS/Discord)</div>
+      <div><span>&#9889;</span> Config sauvegardee + MAJ auto</div>
+    </div>
+  </div>
+</div>
+<script>
+const h='8da1e06fbc22878b04e794af2e2ce2be11e0a03b4e1be005b59cfc40dfd6ae9e';
+async function sha(s){const e=new TextEncoder().encode(s);const b=await crypto.subtle.digest('SHA-256',e);return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function check(){const p=document.getElementById('pwd').value;const d=await sha(p);if(d===h){document.getElementById('login').style.display='none';document.getElementById('dl').style.display='block'}else{document.getElementById('err').style.display='block';setTimeout(()=>document.getElementById('err').style.display='none',2000)}}
+document.getElementById('pwd').addEventListener('keydown',e=>{if(e.key==='Enter')check()});
+</script>
+</body>
+</html>
