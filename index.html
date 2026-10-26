@@ -52,7 +52,7 @@ button:hover{opacity:.85}
   </div>
 </div>
 <script>
-const h='8da1e06fbc22878b04e794af2e2ce2be11e0a03b4e1be005b59cfc40dfd6ae9e';
+const h='f210ba66bba5646fbf5c01dc80675fa02a2c1b1b38ef4f40b362814b604b007e';
 async function sha(s){const e=new TextEncoder().encode(s);const b=await crypto.subtle.digest('SHA-256',e);return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
 async function check(){const p=document.getElementById('pwd').value;const d=await sha(p);if(d===h){document.getElementById('login').style.display='none';document.getElementById('dl').style.display='block'}else{document.getElementById('err').style.display='block';setTimeout(()=>document.getElementById('err').style.display='none',2000)}}
 document.getElementById('pwd').addEventListener('keydown',e=>{if(e.key==='Enter')check()});
